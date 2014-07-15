@@ -1,11 +1,9 @@
 package com.coacha.node;
 
 /**
+ * Basic implementation of the {@link Node} interface.
  * 
  * @author Mark
- * 
- * Basic implementation of the {@link Node} interface.
- *
  */
 public class NodeImpl<T> implements Node<T> {
 	
@@ -20,13 +18,23 @@ public class NodeImpl<T> implements Node<T> {
 		this.value = value;
 	}
 
+	/**
+	 * Constructs a {@link Node} with the specified <tt>value<tt>, <tt>next</tt>,
+	 * and <tt>previous</tt> parameters. Note that this constructor does not
+	 * modify <tt>next</tt> and <tt>previous</tt> to set their appropriate pointers
+	 * to this {@link Node}.
+	 * 
+	 * @param value - the value that will be stored in the {@link Node}.
+	 * @param next - reference to the next {@link Node}.
+	 * @param previous - reference to the previous {@link Node}.
+	 */
 	public NodeImpl(T value, Node<T> next, Node<T> previous) {
 		this.value = value;
 		this.next = next;
 		this.previous = previous;
 	}
 	
-	// Methods from the Node superinterface %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	// Methods from the Node interface %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	@Override
 	public T value() {
@@ -53,6 +61,14 @@ public class NodeImpl<T> implements Node<T> {
 		this.previous = previous;
 	}
 
+	/**
+	 * Default implementation of @link {@link Node#reverse()}. This method
+	 * iterates in two directions: a) from the node to the start of the list;
+	 * and b) from the node to the end of the list. In each iteration, the 'next'
+	 * and 'previous' pointers are redirected to point to the new nodes.
+	 * 
+	 * The method runs in O(n) speed and requires O(n) space.
+	 */
 	@Override
 	public void reverse() {
 		// First, get references to the previous and next nodes
@@ -63,6 +79,7 @@ public class NodeImpl<T> implements Node<T> {
 		setNext(back);
 		
 		// Iterate towards the start of the list and redirect the pointers of each node
+		// Complexity: O(i), where i is the index of the node in the list
 		Node<T> curr = this;
 		while (back != null) {
 			Node<T> temp = back.previous();
@@ -77,6 +94,7 @@ public class NodeImpl<T> implements Node<T> {
 		setPrevious(front);
 		
 		// Iterate towards the end of the list and redirect the pointers of each node
+		// Complexity: O(n - i) where i is the index of the node in the list and n is the size of the list
 		curr = this;
 		while (front != null) {
 			Node<T> temp = front.next();
@@ -89,6 +107,13 @@ public class NodeImpl<T> implements Node<T> {
 		
 	}
 
+	/**
+	 * Default implementation of @link {@link Node#delete()}.
+	 * 
+	 * The method runs in O(1) speed and requires O(1) space.
+	 * 
+	 * @return - the {@link Node} that replaced the deleted {@link Node}. May return null.
+	 */
 	@Override
 	public Node<T> delete() {
 		Node<T> newNodeAtIndex = null;
@@ -121,6 +146,13 @@ public class NodeImpl<T> implements Node<T> {
 		return newNodeAtIndex;
 	}
 
+	/**
+	 * Default implementation of {@link Node#append(Node)}.
+	 * 
+	 * The method runs in O(1) speed and requires O(1) space.
+	 * 
+	 * @param newNode - the new {@link Node} that was appended into the list.
+	 */
 	@Override
 	public void append(Node<T> newNode) {
 		if (newNode == null)
@@ -135,6 +167,13 @@ public class NodeImpl<T> implements Node<T> {
 		newNode.setPrevious(last);
 	}
 
+	/**
+	 * Default implementation of @link {@link Node#insertNext(Node)}.
+	 * 
+	 * The method runs in O(1) speed and requires O(1) space.
+	 * 
+	 * @param newNode - the new {@link Node} that will be inserted after this {@link Node}.
+	 */
 	@Override
 	public void insertNext(Node<T> newNode) {
 		if (newNode == null)
