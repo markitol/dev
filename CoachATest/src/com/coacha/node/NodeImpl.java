@@ -66,7 +66,7 @@ public class NodeImpl<T> implements Node<T> {
 	}
 
 	/**
-	 * Default implementation of @link {@link Node#reverse()}. This method
+	 * Default implementation of {@link Node#reverse()}. This method
 	 * iterates in two directions: a) from the node to the start of the list;
 	 * and b) from the node to the end of the list. In each iteration, the 'next'
 	 * and 'previous' pointers are redirected to point to the new nodes.
@@ -153,7 +153,7 @@ public class NodeImpl<T> implements Node<T> {
 	/**
 	 * Default implementation of {@link Node#append(Node)}.
 	 * 
-	 * The method runs in O(1) speed and requires O(1) space.
+	 * The method runs in O(n) speed and requires O(1) space.
 	 * 
 	 * @param newNode - the new {@link Node} that was appended into the list.
 	 */
