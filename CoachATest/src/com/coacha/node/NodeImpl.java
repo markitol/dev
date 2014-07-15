@@ -13,7 +13,11 @@ public class NodeImpl<T> implements Node<T> {
 	
 	private Node<T> previous;
 	
-	
+	/** 
+	 * Constructs a {@link Node} with the specified <tt>value<tt>.
+	 * 
+	 * @param value - the value that will be stored in the {@link Node}.
+	 */
 	public NodeImpl(T value) {
 		this.value = value;
 	}
@@ -180,8 +184,10 @@ public class NodeImpl<T> implements Node<T> {
 			return;
 		
 		Node<T> next = next();
-		next.setPrevious(newNode);
 		newNode.setNext(next);
+		
+		if (next != null)
+			next.setPrevious(newNode);
 		
 		setNext(newNode);
 		newNode.setPrevious(this);
